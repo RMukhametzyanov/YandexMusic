@@ -2,6 +2,7 @@ from Pages.authorization import Authorization
 from Pages.playradio import PlayRadio
 from Pages.clean_playlist import CleanPlaylist
 
+#smoke
 def test_authorization(browser):
     authorization_main_page = Authorization(browser)
     authorization_main_page.go_to_site()
@@ -9,6 +10,7 @@ def test_authorization(browser):
     authorization_main_page.sign_in('ForTestLogin', 'ForTestLogin123')
     authorization_main_page.sign_in_check()
 
+#acceptance
 def test_playradio(browser):
     authorization_main_page = Authorization(browser)
     authorization_main_page.go_to_site()
@@ -25,7 +27,7 @@ def test_playradio(browser):
     playradio_main_page.like_song_playlist()
     playradio_main_page.check_like_music()
 
-
+#acceptance
 def test_clean_play_list(browser):
     authorization_main_page = Authorization(browser)
     authorization_main_page.go_to_site()
