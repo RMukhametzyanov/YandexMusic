@@ -19,33 +19,9 @@ class CleanPlayListPageLocators:
 
 class CleanPlaylist(BasePage):
 
-    @allure.step("Переход в раздел 'Моя музыка'")
-    def my_music(self):
-        with allure.step("Поиск и клик по кнопке 'Моя музыка'"):
-            my_music_button = self.find_element(CleanPlayListPageLocators.LOCATOR_MyMusic)
-            highlight(my_music_button)
-            my_music_button.click()
-
-        with allure.step("Проверка на имя пользователя, что переход осуществлен"):
-            success_text = "ForTestLogin"
-            element_success = self.find_element(CleanPlayListPageLocators.LOCATOR_MyMusicUserName).text
-            # Сравниваем полученный текст от элемента с эталонным
-            assert (element_success == success_text), \
-                "Эталонный текуст не равен текущему.\n" + \
-                "Текущий: " + element_success + "\nЭталонный: " + success_text
-
-    @allure.step("Открытие плей листа с названием 'Мне нравится'")
-    def like_song_playlist(self):
-        with allure.step("Cлип, чтоб драйвер успел закрыть всплывающее окно 'Показывать уведомления' "
-                         "(в conftest.py настройки профиля на разрешение показывать уведомления"):
-            time.sleep(2)
-
-        with allure.step("Поиск и клик по плейлисту с названием 'Мне нравится'"):
-            choose_my_playlist = self.find_element(CleanPlayListPageLocators.LOCATOR_MyMusicPlayList)
-            highlight(choose_my_playlist)
-            choose_my_playlist.click()
-            return choose_my_playlist
-
+    """
+        Функция удаления песни. Делает ховер по найденной песне и удаляет.
+    """
     @allure.step("Удаление песни из плейлиста")
     def delete_song(self):
         with allure.step("Поиск песни в плейлисте"):
@@ -60,6 +36,14 @@ class CleanPlaylist(BasePage):
             delete_song = self.find_element(CleanPlayListPageLocators.LOCATOR_DeleteSong_button)
             highlight(delete_song)
             delete_song.click()
+
+    """
+        Функция проверки на пустой плейлист. 
+    """
+
+    #
+    # ПЕРЕДЕЛАТЬ, ЭТО НИКУДА НЕ ГОДИТСЯ!!! А ЕСЛИ В ПЛЕЙЛИСТЕ НЕСКОЛЬКО ПЕСЕН?
+    #
 
     @allure.step("Проверка на пустой плейлист")
     def check_song_deleted(self):
