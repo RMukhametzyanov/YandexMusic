@@ -4,10 +4,11 @@ from Functions.Highlight import highlight
 
 import allure
 
-
 """
 Данные для входа: ForTestLogin / ForTestLogin123
 """
+
+#Локаторы
 class AuthorizationPageLocators:
     LOCATOR_login_button =          (By.CSS_SELECTOR, ".log-in")                    #Кнопка "Войти" для перехода к форме авторизации
     LOCATOR_LoginName_field =       (By.XPATH, "//*[@id='passp-field-login']")      #поле ввода Логина
@@ -17,7 +18,9 @@ class AuthorizationPageLocators:
 
 
 class Authorization(BasePage):
-
+    """
+       Функция перехода на форму авторизации.
+    """
     @allure.step("Переход на форму авторизации по кнопке 'Войти'")
     def login_button(self):
         with allure.step("Клик по кнопке Войти"):
@@ -26,6 +29,9 @@ class Authorization(BasePage):
             login_button.click()
             return login_button
 
+    """
+           Функция ввода логина и пароля 
+    """
     @allure.step("Ввод логина и пароля")
     def sign_in (self, login, password):
         with allure.step("Переключаю фокуса на соседнюю вкладку"):
@@ -55,6 +61,9 @@ class Authorization(BasePage):
             highlight(sign_in)
             sign_in.click()
 
+    """
+        Функция проверки, что успешно авторизовались. Смотрим на текст кнопки "Моя музыка"
+    """
     @allure.step('Проверка после входа. Чекаем "Моя музыка"')
     def sign_in_check(self):
         with allure.step("Переключаю на первую вкладку"):
