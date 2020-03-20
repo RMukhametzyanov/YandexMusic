@@ -1,9 +1,11 @@
 from Pages.authorization import Authorization
 from Pages.playradio import PlayRadio
 from Pages.create_playlist import CreateNewPlaylist
-import time
 
 #smoke
+"""
+    Тест-кейс авторизации. Входим на сайт, указываем данные, авторизуемся. Проверяем, что авторизовались.
+"""
 def test_authorization(browser):
     authorization_main_page = Authorization(browser)
     authorization_main_page.go_to_site()
@@ -12,6 +14,10 @@ def test_authorization(browser):
     authorization_main_page.sign_in_check()
 
 #acceptance
+"""
+    Тест-кейс включения Радио. Авторизуемся, включаем Радио, выбираем волну, лайкаем песню. 
+    Проверяем, что песня добавилась в плейлист Мне нравится. Удаляем ее оттуда
+"""
 def test_playradio(browser):
     authorization_main_page = Authorization(browser)
     authorization_main_page.go_to_site()
@@ -29,7 +35,11 @@ def test_playradio(browser):
     playradio_main_page.delete_song()
     playradio_main_page.check_song_deleted()
 
-
+"""
+    Тест кейс создания плейлиста и его удаления. Авторизуемся, создаем плейлист. 
+    Проверяем, что он действительно создан. 
+    Удаляем плейлист. Проверяем, что он действительно удален.
+"""
 def test_create_playlist(browser):
     authorization_main_page = Authorization(browser)
     authorization_main_page.go_to_site()
@@ -45,5 +55,4 @@ def test_create_playlist(browser):
     create_playlist_main_page.rename_new_playlist()
 
     playradio_main_page.my_music()
-
     create_playlist_main_page.delete_new_playlist()
